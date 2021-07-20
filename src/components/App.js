@@ -1,28 +1,36 @@
 import React from 'react';
-import unsplash from '../api/unsplash.js';
+import pokeapi from '../api/pokeapi.js';
 import SearchBar from './SearchBar';
-//import ImageList from './ImageList.js';
+import ImageCard from './ImageCard';
 import FrontPage from './FrontPage.js';
 class App extends React.Component {
   state = { 
-            pokemons:[]
+            pokemons:[],
+            submit:false,
+            searchUrl:""
           };
   onSearchSubmit = async term => {
-    const response = await unsplash.get(`/pokemon/${term}`);
-    console.log(response.data)
+    try{
+      const response = await pokeapi.get(`/pokemon/${term}`);
+      this.setState({searchUrl:response.data.sprites.back_default});
+    }
+    catch(error){
+      console.log(error)
+    }
+    this.setState({submit:true});
   };
   
 
   componentDidMount = async ()=>{
-    const response = await unsplash.get('/pokemon?offset=0&limit=30');
-    const getPokeImageUrl = response.data.results.map(async el=>await unsplash.get(el.url));
+    const response = await pokeapi.get('/pokemon?offset=0&limit=30');
+    const getPokeImageUrl = response.data.results.map(async el=>await pokeapi.get(el.url));
     this.setState({pokemons:getPokeImageUrl});
   }
   render() {
     return (
       <div className='ui container'>
         <SearchBar onSubmit={this.onSearchSubmit} />
-        <FrontPage poke={this.state.pokemons}/>
+        {!this.state.submit ? <FrontPage poke={this.state.pokemons}/>:<ImageCard urls={this.state.searchUrl}/>}
       </div>
     );
   }

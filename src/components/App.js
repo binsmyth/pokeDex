@@ -14,7 +14,7 @@ class App extends React.Component {
   
 
   componentDidMount = async ()=>{
-    const response = await unsplash.get('/pokemon');
+    const response = await unsplash.get('/pokemon?offset=0&limit=30');
     const getPokeImageUrl = response.data.results.map(async el=>await unsplash.get(el.url));
     this.setState({pokemons:getPokeImageUrl});
   }

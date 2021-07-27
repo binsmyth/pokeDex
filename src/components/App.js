@@ -1,14 +1,31 @@
 import React from 'react';
-import pokeapi from '../api/pokeapi.js';
+import pokeapi from '../api/pokeapi';
 import SearchBar from './SearchBar';
 import ImageCard from './ImageCard';
-import FrontPage from './FrontPage.js';
+import FrontPage from './FrontPage';
+import PokeSelect from './PokeSelect';
+
 class App extends React.Component {
   state = { 
             pokemons:[],
             submit:false,
-            searchUrl:""
-          };
+            searchUrl:"",
+            responseCount:0
+            };
+
+  onSelectChange=async(option)=>{
+    const response = await pokeapi.get(`/gender/${option.value}`);
+    const pokemonURL = response.data.pokemon_species_details.map((value)=>`${value.pokemon_species.name}`);
+    const paginate = (array, limit,offset)=>{
+      return array.slice(offset*limit,offset*limit+limit);
+    };
+    const pokeSelectUrlList = paginate(pokemonURL,10,0);
+    console.log(pokeSelectUrlList);
+    const getImageUrl = pokeSelectUrlList.map(async el=>await pokeapi.get(`/pokemon/${el}`));
+    this.setState({pokemons:getImageUrl});
+  }
+  
+
   onSearchSubmit = async term => {
     try{
       const response = await pokeapi.get(`/pokemon/${term}`);
@@ -21,16 +38,23 @@ class App extends React.Component {
   };
   
 
-  componentDidMount = async ()=>{
-    const response = await pokeapi.get('/pokemon?offset=0&limit=30');
+  getPokeImageUrl = async (offset,limit)=>{
+    const response = await pokeapi.get(`/pokemon?offset=${offset}&limit=${limit}`);
     const getPokeImageUrl = response.data.results.map(async el=>await pokeapi.get(el.url));
     this.setState({pokemons:getPokeImageUrl});
+    this.setState({responseCount:response.data.count});
   }
+
+  componentDidMount(){
+    this.getPokeImageUrl(0,10); 
+  }
+
   render() {
     return (
       <div className='ui container'>
         <SearchBar onSubmit={this.onSearchSubmit} />
-        {!this.state.submit ? <FrontPage poke={this.state.pokemons}/>:<ImageCard urls={this.state.searchUrl}/>}
+        <PokeSelect onSelectChange={this.onSelectChange} />
+        {!this.state.submit ? <FrontPage poke={this.state.pokemons} responseCount={this.state.responseCount} getPokeImageUrl={this.getPokeImageUrl}/>:<ImageCard urls={this.state.searchUrl}/>}
       </div>
     );
   }

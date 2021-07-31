@@ -7,12 +7,16 @@ const options = [
   {value:3,label:'Genderless'}
 ];
 
+const change = (option,props)=>{
+  console.log(option);
+  props.onSelectChange(option,"a");
+}
 const PokeSelect = (props)=>(
   <Select
     label="Select Pokemon"
     options={options} 
     className="pokeselect"
-    onChange={props.onSelectChange}
+    onChange={(option)=>change(option,props)}
   />
 )
 

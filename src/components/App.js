@@ -13,9 +13,10 @@ class App extends React.Component {
             responseCount:0
             };
 
-  onSelectChange = async (option) =>{
+  onSelectChange = async (option,a) =>{
     const response = await pokeapi.get(`/gender/${option.value}`);
     const pokemonURL = response.data.pokemon_species_details.map((value)=>`${value.pokemon_species.name}`);
+    console.log(option , a);
     const pokeSelectUrlList = this.paginate(pokemonURL,0,10);
     const getImageUrl = pokeSelectUrlList.map(async el=>await pokeapi.get(`/pokemon/${el}`));
     this.setState({pokemons:getImageUrl});
@@ -23,11 +24,6 @@ class App extends React.Component {
 
   paginate = (array,offset,limit) =>{
     return array.slice(offset*limit,offset*limit+limit);
-  }
-
-
-  pokemonURLHandler= (urlList)=>{
-    this.setState({pokemons:urlList});
   }
 
   onSearchSubmit = async term => {

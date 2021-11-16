@@ -3,7 +3,7 @@ import React,{useState,useEffect} from 'react';
 import PokemonDetail from './PokemonDetail';
 import ReactPaginate from 'react-paginate';
 import './styles/styles.css';
-
+import {Grid,Card} from 'semantic-ui-react';
 const FrontPage = props =>{
   const [pokeData,setPokeData] = useState();//data storage from api
   const [pokeDetail, setPokeDetail] = useState(false);//show or hide the pokemon details
@@ -31,16 +31,20 @@ const FrontPage = props =>{
   } 
   if (pokeData === undefined) return null;
   if (pokeDetail === true) return <PokemonDetail details = {pokeData[pokeIndex]}/>
-  return ( 
+  return (
     <div>
-      {pokeData.map((src,index)=>{
-        return(
-          <div key={index} onClick={(e)=>renderPokeDetail(index,e)}>
-            <ImageCard urls={src.sprites.front_default} />
-            {src.name}
-          </div>
-        )
-      })}
+      <Grid columns={5} padded>
+        {pokeData.map((src,index)=>{
+          return(
+            <Grid.Column key={index} onClick={(e)=>renderPokeDetail(index,e)}>
+              <Card>
+              <ImageCard urls={src.sprites.front_default} />
+                <Card.Description>{src.name}</Card.Description>
+              </Card>
+            </Grid.Column>
+          )
+        })}
+      </Grid>
       <ReactPaginate 
         onPageChange={handlePageClick}
         pageCount={pagecount}

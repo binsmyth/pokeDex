@@ -6,7 +6,7 @@ import FrontPage from './FrontPage';
 import PokeSelect from './PokeSelect';
 import 'semantic-ui-css/semantic.min.css';
 import {BrowserRouter as Router} from 'react-router-dom';
-import {Navigate,Route,Routes} from 'react-router-dom';
+import {Navigate,Route,Routes,Switch} from 'react-router-dom';
 class App extends React.Component {
   state = { 
             pokemons:[],
@@ -30,6 +30,7 @@ class App extends React.Component {
   onSearchSubmit = async term => {
     try{
       const response = await pokeapi.get(`/pokemon/${term}`);
+      console.log(response);
       this.setState({searchUrl:response.data.sprites.back_default});
     }
     catch(error){
@@ -58,9 +59,10 @@ class App extends React.Component {
           <PokeSelect onSelectChange={this.onSelectChange}/>
           {// {!this.state.submit ? <FrontPage poke={this.state.pokemons} responseCount={this.state.responseCount} getPokeImageUrl={this.getPokeImageUrl}/>:<ImageCard urls={this.state.searchUrl}/>}
           }</div>
-        {!this.state.submit?<Navigate to="/Frontpage"/>:null}
+        {!this.state.submit?<Navigate to="/Frontpage"/>:<Navigate to="/Search"/>}
         <Routes>
-          <Route path="/FrontPage" element={<FrontPage poke={this.state.pokemons} responseCount={this.state.responseCount} getPokeImageUrl={this.getPokeImageUrl}/>}>></Route>
+          <Route path="/FrontPage" element={<FrontPage poke={this.state.pokemons} responseCount={this.state.responseCount} getPokeImageUrl={this.getPokeImageUrl}/>}></Route>
+          <Route path="/Search" element={<ImageCard urls={this.state.searchUrl}/>}></Route>
         </Routes>
       </Router>
     );

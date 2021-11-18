@@ -30,7 +30,7 @@ const FrontPage = props =>{
     props.getPokeImageUrl(data.selected*10,limit);
   } 
   if (pokeData === undefined) return null;
-  if (pokeDetail === true) return <PokemonDetail details = {pokeData[pokeIndex]}/>
+  if (pokeDetail === true) return <PokemonDetail details = {pokeData[pokeIndex]} whichPoke = {pokeIndex} data={data}/>
   return (
     <div>
       <Grid columns={5} padded>

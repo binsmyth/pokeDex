@@ -1,29 +1,25 @@
-import React from 'react';
-import {Button, Form,Input} from 'semantic-ui-react';
+import React, { useState } from 'react';
+import {Button,Form,Input} from 'semantic-ui-react';
 
-class SearchBar extends React.Component {
-  state = { term: '' };
-
-  onFormSubmit = e => {
+const SearchBar = ({onSubmit}) =>{
+  const [term,setTerm] = useState("");
+  const onFormSubmit = e => {
     e.preventDefault();
-    this.props.onSubmit(this.state.term);
+    console.log("term", term)
+    onSubmit(term);
   };
-
-  render() {
-    return (
-        <Form onSubmit={this.onFormSubmit}>
-          <Input
-            fluid
-            icon="search"
-            size="big"
-            className="prompt"
-            placeholder="Image Search..."
-            onChange={e => this.setState({ term: e.target.value })}
-            type='text'
-          />
-        </Form>
-    );
-  }
+  return(
+    <Form onSubmit={(e) => onFormSubmit(e)}>
+      <Input
+        fluid
+        icon="search"
+        size="big"
+        className="prompt"
+        placeholder="Image Search..."
+        onChange={e => setTerm(e.target.value)}
+        type='text'
+      />
+    </Form>
+  )
 }
-
 export default SearchBar;

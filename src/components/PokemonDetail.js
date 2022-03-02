@@ -2,15 +2,6 @@ import React,{useState,useEffect} from 'react';
 import {Image,Card,List} from 'semantic-ui-react';
 
 const PokemonDetail = props =>{
-  const [pokeData,setPokeData] = useState();
-  console.log(props);
-  
-  useEffect(()=>{
-    Promise.all(props.data)
-      .then(poke=>poke.map(result=>result.data))
-      .then(pokeData=>setPokeData(pokeData))
-  },[setPokeData,props.data]);
-  console.log(props.whichPoke);
   return (
     <Card>
       <Image src={props.details.sprites.front_default} size='medium'/>

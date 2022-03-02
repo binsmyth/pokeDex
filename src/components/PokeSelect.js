@@ -9,7 +9,6 @@ const options = [
 ];
 
 const change = (option,props)=>{
-  console.log(option);
   props.onSelectChange(option,"a");
 }
 const PokeSelect = (props)=>(

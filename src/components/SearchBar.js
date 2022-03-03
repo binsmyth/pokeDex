@@ -1,12 +1,22 @@
 import React, { useState } from 'react';
 import {Button,Form,Input} from 'semantic-ui-react';
+import pokeapi from '../api/pokeapi';
 
-const SearchBar = ({onSubmit}) =>{
+const SearchBar = ({onSubmit, setSearchUrl, setSubmit}) =>{
   const [term,setTerm] = useState("");
   const onFormSubmit = e => {
     e.preventDefault();
-    console.log("term", term)
-    onSubmit(term);
+    onSearchSubmit(term);
+  };
+  const onSearchSubmit = async term => {
+    try{
+      const response = await pokeapi.get(`/pokemon/${term}`);
+      setSearchUrl(response.data.sprites.front_default);
+    }
+    catch(error){
+      console.log(error)
+    }
+    setSubmit(true);
   };
   return(
     <Form onSubmit={(e) => onFormSubmit(e)}>

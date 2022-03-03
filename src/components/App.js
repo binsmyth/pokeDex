@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Route, Router, Routes, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import pokeapi from '../api/pokeapi';
 import SearchBar from './SearchBar';
 import FrontPage from './FrontPage';
@@ -32,17 +32,19 @@ const App=() => {
       .then(poke=>poke.map(result=>result.data))
       .then(pokeData=>setPokeData(pokeData));
   }
-  
-  const onSearchSubmit = async term => {
-    try{
-      const response = await pokeapi.get(`/pokemon/${term}`);
-      setSearchUrl(response.data.sprites.front_default);
-    }
-    catch(error){
-      console.log(error)
-    }
-    setSubmit(true);
-  };
+  const paginate = (array,offset,limit) =>{
+    return array.slice(offset*limit,offset*limit+limit);
+  }
+  // const onSearchSubmit = async term => {
+  //   try{
+  //     const response = await pokeapi.get(`/pokemon/${term}`);
+  //     setSearchUrl(response.data.sprites.front_default);
+  //   }
+  //   catch(error){
+  //     console.log(error)
+  //   }
+  //   setSubmit(true);
+  // };
   const getPokeImageUrl = async (offset,limit)=>{
     const response = await pokeapi.get(`/pokemon?offset=${offset}&limit=${limit}`);
     const PokeImageUrl = response.data.results.map(async el=>await pokeapi.get(el.url));
@@ -71,7 +73,7 @@ const App=() => {
   },[submit,navigate])
   return (
     <div className='ui container'>
-      <SearchBar setSearchUrl={setSearchUrl} onSubmit={onSearchSubmit} />
+      <SearchBar setSubmit={setSubmit} setSearchUrl={setSearchUrl} />
       <PokeSelect onSelectChange={onSelectChange}/>
       {
         submit &&

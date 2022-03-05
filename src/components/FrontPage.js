@@ -2,7 +2,7 @@ import ImageCard from './ImageCard';
 import React,{useState,useEffect} from 'react';
 import PokemonDetail from './PokemonDetail';
 import ReactPaginate from 'react-paginate';
-import {useNavigate} from 'react-router-dom';
+import {useNavigate, Link} from 'react-router-dom';
 import './styles/styles.css';
 import {Grid,Card} from 'semantic-ui-react';
 const FrontPage = props =>{
@@ -16,10 +16,12 @@ const FrontPage = props =>{
         {props.pokeData.map((src,index)=>{
           return(
             <Grid.Column key={index} onClick={(e)=>props.renderPokeDetail(index,e)}>
+              <Link to={`/PokemonDetail/${index}`}>
               <Card>
-              <ImageCard urls={src.sprites.front_default} />
-                <Card.Description>{src.name}</Card.Description>
-              </Card>
+                <ImageCard urls={src.sprites.front_default} />
+                  <Card.Description>{src.name}</Card.Description>
+                </Card>
+              </Link>
             </Grid.Column>
           )
         })}

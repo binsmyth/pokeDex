@@ -5,6 +5,7 @@ import SearchBar from './SearchBar';
 import FrontPage from './FrontPage';
 import PokeSelect from './PokeSelect';
 import ImageCard from './ImageCard';
+import { Outlet } from 'react-router-dom';
 import 'semantic-ui-css/semantic.min.css';
 import PokemonDetail from './PokemonDetail';
 import ReactPaginate from 'react-paginate';
@@ -23,29 +24,7 @@ const App=() => {
     getPokeImageUrl(d.selected*10,limit);
   } 
 
-  const onSelectChange = async (option,a) =>{
-    const response = await pokeapi.get(`/gender/${option.value}`);
-    const pokemonURL = response.data.pokemon_species_details.map((value)=>`${value.pokemon_species.name}`);
-    const pokeSelectUrlList = paginate(pokemonURL,0,10);
-    const getImageUrl = pokeSelectUrlList.map(async el=>await pokeapi.get(`/pokemon/${el}`));
-    Promise.all(getImageUrl)
-      .then(poke=>poke.map(result=>result.data))
-      .then(pokeData=>setPokeData(pokeData));
-  }
-  const paginate = (array,offset,limit) =>{
-    return array.slice(offset*limit,offset*limit+limit);
-  }
-  // const onSearchSubmit = async term => {
-  //   try{
-  //     const response = await pokeapi.get(`/pokemon/${term}`);
-  //     setSearchUrl(response.data.sprites.front_default);
-  //   }
-  //   catch(error){
-  //     console.log(error)
-  //   }
-  //   setSubmit(true);
-  // };
-  const getPokeImageUrl = async (offset,limit)=>{
+  const getPokeImageUrl = async (offset,limit)=>{ // too many api request need redux
     const response = await pokeapi.get(`/pokemon?offset=${offset}&limit=${limit}`);
     const PokeImageUrl = response.data.results.map(async el=>await pokeapi.get(el.url));
     Promise.all(PokeImageUrl)
@@ -56,7 +35,7 @@ const App=() => {
 
   //when pokemon div is clicked open pokemon details
   const renderPokeDetail = (index,e)=>{
-    setShowPokeDetail(!showPokeDetail);
+    // setShowPokeDetail(!showPokeDetail);
     setPokeIndex(index);
   }
 
@@ -67,23 +46,24 @@ const App=() => {
       navigate('/PokemonDetail', { replace:true });
     }
     else {
-      navigate('/FrontPage',{ replace: true });
+      // navigate('/FrontPage',{ replace: true });
       getPokeImageUrl(0,10);
     }
-  },[submit,navigate])
+  },[submit,navigate, showPokeDetail])
   return (
     <div className='ui container'>
       <SearchBar setSubmit={setSubmit} setSearchUrl={setSearchUrl} />
-      <PokeSelect onSelectChange={onSelectChange}/>
+      <PokeSelect setPokeData={setPokeData} />
       {
         submit &&
           <ImageCard urls={searchUrl}/>
       }
       <FrontPage pokeData={pokeData} responseCount={responseCount} renderPokeDetail={renderPokeDetail}/>
-      {  
+      {/* {  
         showPokeDetail &&
-          <PokemonDetail details = {pokeData[pokeIndex]} whichPoke = {pokeIndex} />
-      }
+          <PokemonDetail details = {pokeData[pokeIndex]}/>
+      } */}
+      <Outlet />
       <ReactPaginate 
         onPageChange={handlePageClick}
         pageCount={pagecount}

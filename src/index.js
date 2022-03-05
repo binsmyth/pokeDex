@@ -12,7 +12,7 @@ ReactDOM.render(
     <Routes>
       <Route path="/" element={<App />} >
         <Route path="/FrontPage" element={<FrontPage />} />
-        <Route path="/PokemonDetail" element={<PokemonDetail />} />
+        <Route path="/PokemonDetail/:index" element={<PokemonDetail />} />
         <Route path="/Search" element={<ImageCard />} />
       </Route>
     </Routes>

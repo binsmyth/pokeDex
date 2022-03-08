@@ -6,17 +6,15 @@ import pokeapi from '../api/pokeapi';
 const PokemonDetail = props =>{
   const [detail, setDetail] = useState();
   let params = useParams();
-  const getDetail = async() => {
-    const data = await pokeapi.get(`pokemon/${parseInt(params.index) + 1}`);
-    setDetail(data);
-  }
   useEffect (()=>{
+    const getDetail = async() => {
+      const data = await pokeapi.get(`pokemon/${params.index}`);
+      setDetail(data);
+    }
     getDetail();
-    console.log(parseInt(params.index) + 1);
   },[params])
   return (
     <Card>
-      {console.log(detail)}
       <Image src={detail?.data.sprites.front_default} size='medium'/>
       <Card.Content>
 

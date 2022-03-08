@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {Button,Form,Input} from 'semantic-ui-react';
+import { Form, Input } from 'semantic-ui-react';
 import pokeapi from '../api/pokeapi';
 
 const SearchBar = ({onSubmit, setSearchUrl, setSubmit}) =>{

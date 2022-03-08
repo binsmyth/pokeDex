@@ -5,7 +5,7 @@ import App from './components/App';
 import FrontPage from './components/FrontPage';
 import ImageCard from './components/ImageCard';
 import PokemonDetail from './components/PokemonDetail';
-import {Navigate,Route,Routes,Switch} from 'react-router-dom';
+import { Route,Routes } from 'react-router-dom';
 
 ReactDOM.render(
   <BrowserRouter>

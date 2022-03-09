@@ -12,6 +12,7 @@
 /build
 
 # misc
+pokedex.code-workspace
 .DS_Store
 .env.local
 .env.development.local

@@ -1,29 +1,35 @@
-import React from 'react';
-import {Button, Form,Input} from 'semantic-ui-react';
+import React, { useState } from 'react';
+import { Form, Input } from 'semantic-ui-react';
+import pokeapi from '../api/pokeapi';
 
-class SearchBar extends React.Component {
-  state = { term: '' };
-
-  onFormSubmit = e => {
+const SearchBar = ({onSubmit, setSearchUrl, setSubmit}) =>{
+  const [term,setTerm] = useState("");
+  const onFormSubmit = e => {
     e.preventDefault();
-    this.props.onSubmit(this.state.term);
+    onSearchSubmit(term);
   };
-
-  render() {
-    return (
-        <Form onSubmit={this.onFormSubmit}>
-          <Input
-            fluid
-            icon="search"
-            size="big"
-            className="prompt"
-            placeholder="Image Search..."
-            onChange={e => this.setState({ term: e.target.value })}
-            type='text'
-          />
-        </Form>
-    );
-  }
+  const onSearchSubmit = async term => {
+    try{
+      const response = await pokeapi.get(`/pokemon/${term}`);
+      setSearchUrl(response.data.sprites.front_default);
+    }
+    catch(error){
+      console.log(error)
+    }
+    setSubmit(true);
+  };
+  return(
+    <Form onSubmit={(e) => onFormSubmit(e)}>
+      <Input
+        fluid
+        icon="search"
+        size="big"
+        className="prompt"
+        placeholder="Image Search..."
+        onChange={e => setTerm(e.target.value)}
+        type='text'
+      />
+    </Form>
+  )
 }
-
 export default SearchBar;

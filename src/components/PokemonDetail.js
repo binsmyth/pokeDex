@@ -14,7 +14,7 @@ const PokemonDetail = props =>{
     getDetail();
   },[params])
   return (
-    <Card>
+    <Card centered>
       <Image src={detail?.data.sprites.front_default} size='medium'/>
       <Card.Content>
 

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Form, Input } from 'semantic-ui-react';
+import { Form, Input, Search } from 'semantic-ui-react';
 import pokeapi from '../api/pokeapi';
 
 const SearchBar = ({onSubmit, setSearchUrl, setSubmit}) =>{
@@ -20,6 +20,7 @@ const SearchBar = ({onSubmit, setSearchUrl, setSubmit}) =>{
   };
   return(
     <Form onSubmit={(e) => onFormSubmit(e)}>
+      <Search onSearchChange={(e)=>console.log(e.target)}/>
       <Input
         fluid
         icon="search"

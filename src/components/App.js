@@ -4,20 +4,22 @@ import pokeapi from '../api/pokeapi';
 import SearchBar from './SearchBar';
 import PokeSelect from './PokeSelect';
 import ImageCard from './ImageCard';
-import { Outlet, Link } from 'react-router-dom';
+import { useOutlet } from 'react-router-dom';
+import { Container, Grid, Segment, Divider, Search } from 'semantic-ui-react';
 import 'semantic-ui-css/semantic.min.css';
 import ReactPaginate from 'react-paginate';
+import FrontPage from './FrontPage';
 const App=() => {
   const [searchUrl, setSearchUrl] = useState("");
   const [submit, setSubmit] = useState(false);
   const [responseCount, setResponseCount] = useState(0);
   const [pokeData,setPokeData] = useState();//data storage from api
-  const limit = 10;
+  const limit = 6;
   const pagecount = Math.ceil(responseCount/limit);
+  const child = useOutlet();
   let navigate = useNavigate();
-
   const handlePageClick = (d)=>{
-    getPokeImageUrl(d.selected*10,limit);
+    getPokeImageUrl(d.selected*6,limit);
   } 
 
   const getPokeImageUrl = async (offset,limit)=>{ // too many api request need redux
@@ -28,32 +30,45 @@ const App=() => {
       .then(pokeData=>setPokeData(pokeData))
     setResponseCount(response.data.count);
   }
-
+  const renderFrontPage = () =>{
+    return(
+      <>
+        <FrontPage pokeData={pokeData} />
+        <ReactPaginate 
+            onPageChange={handlePageClick}
+            pageCount={pagecount}
+            containerClassName={'pagination'}
+            activeClassName={'active'}
+          />
+      </>
+    )
+  }
   useEffect(()=>{
-    if(submit) {
-      navigate('/Search', { replace: true });
-    }
-    getPokeImageUrl(0,10);
-  },[submit,navigate])
+    getPokeImageUrl(0,limit);
+  },[])
   return (
-    <div className='ui container'>
-      <SearchBar setSubmit={setSubmit} setSearchUrl={setSearchUrl} />
-      <PokeSelect setPokeData={setPokeData} />
-      <Link to={`/Frontpage`} state={{ pokeData: pokeData }}>
-        View all Pokemons
-      </Link>
+    <Container className='poke-container'>
+      <Segment>
+        <Search />
+        <SearchBar setSubmit={setSubmit} setSearchUrl={setSearchUrl} />
+        <PokeSelect setPokeData={setPokeData} />
+      </Segment>
+      <Segment>
+        <Grid columns={2}>
+          <Grid.Column>
+            {child || 'Welcome to Pokedex'}
+          </Grid.Column>
+          <Grid.Column>
+            {renderFrontPage()}
+          </Grid.Column>
+        </Grid>
+        <Divider vertical></Divider>
+      </Segment>
       {
         submit &&
           <ImageCard urls={searchUrl}/>
       }
-      <Outlet />
-      <ReactPaginate 
-        onPageChange={handlePageClick}
-        pageCount={pagecount}
-        containerClassName={'pagination'}
-        activeClassName={'active'}
-      />
-    </div>
+    </Container>
   );
 }
 export default App;

@@ -5,7 +5,7 @@ import SearchBar from './SearchBar';
 import PokeSelect from './PokeSelect';
 import ImageCard from './ImageCard';
 import { useOutlet } from 'react-router-dom';
-import { Container, Grid, Segment, Divider, Search } from 'semantic-ui-react';
+import { Container, Grid, Segment, Divider } from 'semantic-ui-react';
 import 'semantic-ui-css/semantic.min.css';
 import ReactPaginate from 'react-paginate';
 import FrontPage from './FrontPage';
@@ -49,7 +49,6 @@ const App=() => {
   return (
     <Container className='poke-container'>
       <Segment>
-        <Search />
         <SearchBar setSubmit={setSubmit} setSearchUrl={setSearchUrl} />
         <PokeSelect setPokeData={setPokeData} />
       </Segment>

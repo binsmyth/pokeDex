@@ -20,13 +20,11 @@ const SearchBar = ({onSubmit, setSearchUrl, setSubmit}) =>{
   };
   return(
     <Form onSubmit={(e) => onFormSubmit(e)}>
-      <Search onSearchChange={(e)=>console.log(e.target)}/>
       <Input
-        fluid
         icon="search"
         size="big"
         className="prompt"
-        placeholder="Image Search..."
+        placeholder="Search..."
         onChange={e => setTerm(e.target.value)}
         type='text'
       />

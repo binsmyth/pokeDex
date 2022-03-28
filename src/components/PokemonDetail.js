@@ -1,18 +1,19 @@
-import React,{useState,useEffect} from 'react';
-import {Image,Card,List} from 'semantic-ui-react';
-import { useParams } from 'react-router-dom';
+import React,{ useState, useEffect } from 'react';
+import { Image, Card, List } from 'semantic-ui-react';
+import { useLocation } from 'react-router-dom';
 import pokeapi from '../api/pokeapi';
 
 const PokemonDetail = props =>{
   const [detail, setDetail] = useState();
-  let params = useParams();
+  const location = useLocation();
   useEffect (()=>{
     const getDetail = async() => {
-      const data = await pokeapi.get(`pokemon/${params.index}`);
+      const data = await pokeapi.get(`pokemon/${location.state.id}`);
       setDetail(data);
     }
+    if(!location.state) return;
     getDetail();
-  },[params])
+  },[location])
   return (
     <Card centered>
       <Image src={detail?.data.sprites.front_default} size='medium'/>

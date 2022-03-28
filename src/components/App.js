@@ -55,7 +55,8 @@ const App=() => {
       <Segment>
         <Grid columns={2}>
           <Grid.Column>
-            {child || 'Welcome to Pokedex'}
+            Welcome to Pokedex
+            {child || ''}
           </Grid.Column>
           <Grid.Column>
             {renderFrontPage()}

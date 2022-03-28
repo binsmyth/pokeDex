@@ -7,9 +7,9 @@ const FrontPage = props =>{
   return (
     <Grid relaxed='very' columns={3}>
       {props.pokeData && props.pokeData.map((src,index)=>{
-        return(
+        return (
           <Grid.Column key={index} >
-            <Link to={`/PokemonDetail/${src.id}`}>
+            <Link to={`/PokemonDetail/${src.id}`} state={{id:src.id}}>
             <Card>
               <ImageCard urls={src.sprites.front_default} />
                 <Card.Description>{src.name}</Card.Description>

@@ -2,23 +2,23 @@ import ImageCard from './ImageCard';
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './styles/styles.css';
-import {Grid,Card} from 'semantic-ui-react';
+import { SimpleGrid, Card, Text } from '@mantine/core';
 const FrontPage = props =>{
   return (
-    <Grid relaxed='very' columns={3}>
+    <SimpleGrid cols={3}>
       {props.pokeData && props.pokeData.map((src,index)=>{
         return (
-          <Grid.Column key={index} >
+          <div key={index} >
             <Link to={`/PokemonDetail/${src.id}`} state={{id:src.id}}>
-            <Card>
-              <ImageCard urls={src.sprites.front_default} />
-                <Card.Description>{src.name}</Card.Description>
+              <Card p="lg" shadow="sm">
+                <Card.Section><ImageCard urls={src.sprites.front_default} /></Card.Section>
+                <Card.Section><Text align="center" size="xs">{src.name}</Text></Card.Section>
               </Card>
             </Link>
-          </Grid.Column>
+          </div>
         )
       })}
-    </Grid>
+    </SimpleGrid>
   )
 };
 

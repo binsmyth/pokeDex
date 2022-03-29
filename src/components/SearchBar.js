@@ -5,7 +5,7 @@ import pokeapi from '../api/pokeapi';
 import { TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
 
-const SearchBar = ({ onSubmit, setSearchUrl, setSubmit }) =>{
+const SearchBar = ({ onSubmit }) =>{
   const [term, setTerm] = useState("");
   const [search, setSearch] = useSearchParams();
   const navigate = useNavigate();
@@ -24,12 +24,10 @@ const SearchBar = ({ onSubmit, setSearchUrl, setSubmit }) =>{
     try{
       const response = await pokeapi.get(`/pokemon/${term}`);
       navigate(`/PokemonDetail/${response.data.id}`, {state : { id: response.data.id }});
-      setSearchUrl(response.data.sprites.front_default);
     }
     catch(error){
       console.log(error)
     }
-    setSubmit(true);
   };
 
   const handleChange = e =>{

@@ -3,15 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import pokeapi from '../api/pokeapi';
 import SearchBar from './SearchBar';
 import PokeSelect from './PokeSelect';
-import ImageCard from './ImageCard';
 import { useOutlet } from 'react-router-dom';
-import { Container, Grid, Segment, Divider } from 'semantic-ui-react';
+import { Grid, Container, Stack } from '@mantine/core';
+import { /*Container, Grid,*/ Segment, Divider } from 'semantic-ui-react';
 import 'semantic-ui-css/semantic.min.css';
 import ReactPaginate from 'react-paginate';
 import FrontPage from './FrontPage';
 const App=() => {
-  const [searchUrl, setSearchUrl] = useState("");
-  const [submit, setSubmit] = useState(false);
   const [responseCount, setResponseCount] = useState(0);
   const [pokeData,setPokeData] = useState();//data storage from api
   const limit = 6;
@@ -34,11 +32,15 @@ const App=() => {
     return(
       <>
         <FrontPage pokeData={pokeData} />
-        <ReactPaginate 
+        <ReactPaginate
+            breakLabel="..."
+            nextLabel=">"
+            previousLabel="<"
             onPageChange={handlePageClick}
             pageCount={pagecount}
             containerClassName={'pagination'}
             activeClassName={'active'}
+            pageRangeDisplayed={1}
           />
       </>
     )
@@ -47,27 +49,22 @@ const App=() => {
     getPokeImageUrl(0,limit);
   },[])
   return (
-    <Container className='poke-container'>
-      <Segment>
-        <SearchBar setSubmit={setSubmit} setSearchUrl={setSearchUrl} />
+    <Container size="xs">
+      <Stack>
+        <SearchBar />
         <PokeSelect setPokeData={setPokeData} />
-      </Segment>
+      </Stack>
       <Segment>
-        <Grid columns={2}>
-          <Grid.Column>
+        <Grid>
+          <Grid.Col span={6}>
             Welcome to Pokedex
             {child || ''}
-          </Grid.Column>
-          <Grid.Column>
+          </Grid.Col>
+          <Grid.Col span={6}>
             {renderFrontPage()}
-          </Grid.Column>
+          </Grid.Col >
         </Grid>
-        <Divider vertical></Divider>
       </Segment>
-      {
-        submit &&
-          <ImageCard urls={searchUrl}/>
-      }
     </Container>
   );
 }

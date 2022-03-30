@@ -12,7 +12,7 @@ const FrontPage = props =>{
             <Link to={`/PokemonDetail/${src.id}`} state={{id:src.id}}>
               <Card p="lg" shadow="sm">
                 <Card.Section><ImageCard urls={src.sprites.front_default} /></Card.Section>
-                <Card.Section><Text align="center" size="xs">{src.name}</Text></Card.Section>
+                <Card.Section><Text align="center" lineClamp={1} size="xs">{src.name}</Text></Card.Section>
               </Card>
             </Link>
           </div>

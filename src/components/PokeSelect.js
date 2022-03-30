@@ -17,10 +17,9 @@ const PokeSelect = (props)=>{
   }
   
   const onSelectChange = async (option) =>{
-    console.log("hello")
     const response = await pokeapi.get(`/gender/${option.value}`);
     const pokemonURL = response.data.pokemon_species_details.map((value)=>`${value.pokemon_species.name}`);
-    const pokeSelectUrlList = paginate(pokemonURL,0,10);
+    const pokeSelectUrlList = paginate(pokemonURL,0,6);
     const getImageUrl = pokeSelectUrlList.map(async el=>await pokeapi.get(`/pokemon/${el}`));
     Promise.all(getImageUrl)
       .then(poke=>poke.map(result=>result.data))
@@ -31,8 +30,8 @@ const PokeSelect = (props)=>{
       placeholder="Select Pokemon Type"
       fluid
       selection
-      options={options} 
-      onChange={(option,value)=>change(value,props)}
+      options={ options } 
+      onChange={ (option, value) => change(value) }
     />
   )
 }

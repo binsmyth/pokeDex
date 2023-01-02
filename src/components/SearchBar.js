@@ -1,12 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
-import { Form, Input, Search } from 'semantic-ui-react';
 import pokeapi from '../api/pokeapi';
 import { TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
 
 const SearchBar = ({ onSubmit }) =>{
-  const [term, setTerm] = useState("");
   const [search, setSearch] = useSearchParams();
   const navigate = useNavigate();
 
@@ -14,6 +12,7 @@ const SearchBar = ({ onSubmit }) =>{
     e.preventDefault();
     onSearchSubmit(form.values.term);
   };
+  console.log(search);
   
   const form = useForm({
     initialValues:{

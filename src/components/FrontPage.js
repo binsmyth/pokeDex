@@ -1,6 +1,6 @@
 import ImageCard from './ImageCard';
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './styles/styles.css';
 import { SimpleGrid, Card, Text } from '@mantine/core';
 const FrontPage = props =>{

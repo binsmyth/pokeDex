@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import pokeapi from '../api/pokeapi';
 import SearchBar from './SearchBar';
 import PokeSelect from './PokeSelect';
 import { useOutlet } from 'react-router-dom';
 import { Grid, Container, Stack } from '@mantine/core';
-import { /*Container, Grid,*/ Segment, Divider } from 'semantic-ui-react';
+import { /*Container, Grid,*/ Segment} from 'semantic-ui-react';
 import 'semantic-ui-css/semantic.min.css';
 import ReactPaginate from 'react-paginate';
 import FrontPage from './FrontPage';
@@ -15,7 +14,6 @@ const App=() => {
   const limit = 6;
   const pagecount = Math.ceil(responseCount/limit);
   const child = useOutlet();
-  let navigate = useNavigate();
   const handlePageClick = (d)=>{
     getPokeImageUrl(d.selected*6,limit);
   } 

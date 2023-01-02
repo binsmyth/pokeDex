@@ -8,7 +8,7 @@ import PokemonDetail from './components/PokemonDetail';
 import { Route,Routes } from 'react-router-dom';
 
 ReactDOM.render(
-  <BrowserRouter basename={process.env.PUBLIC_URL}>
+  <BrowserRouter basename="/">
     <Routes>
       <Route path="/" element={<App />} >
         <Route path="/FrontPage" element={<FrontPage />} />

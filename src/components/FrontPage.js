@@ -9,9 +9,9 @@ const FrontPage = props =>{
       {props.pokeData && props.pokeData.map((src,index)=>{
         return (
           <div key={index} >
-            <Link to={`/PokemonDetail/${src.id}`} state={{id:src.id}}>
-              <Card p="lg" shadow="sm">
-                <Card.Section><ImageCard urls={src.sprites.front_default} /></Card.Section>
+            <Link to={`/PokemonDetail/${src.id}`} state={{id:src.id, urls:src.sprites.front_default}}>
+              <Card withBorder p="xl" shadow="sm">
+                <Card.Section><ImageCard urls={src.sprites.front_default} id={src.id}/></Card.Section>
                 <Card.Section><Text align="center" lineClamp={1} size="xs">{src.name}</Text></Card.Section>
               </Card>
             </Link>

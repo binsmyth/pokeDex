@@ -1,68 +1,58 @@
 import React, { useEffect, useState } from 'react';
-import pokeapi from '../api/pokeapi';
 import SearchBar from './SearchBar';
 import PokeSelect from './PokeSelect';
 import { useOutlet } from 'react-router-dom';
-import { Grid, Container, Stack } from '@mantine/core';
-import { /*Container, Grid,*/ Segment} from 'semantic-ui-react';
+import { Grid, Container, Stack, Pagination, Space } from '@mantine/core';
 import 'semantic-ui-css/semantic.min.css';
-import ReactPaginate from 'react-paginate';
 import FrontPage from './FrontPage';
+import pokeapi from '../api/pokeapi';
 const App=() => {
   const [responseCount, setResponseCount] = useState(0);
   const [pokeData,setPokeData] = useState();//data storage from api
   const limit = 6;
   const pagecount = Math.ceil(responseCount/limit);
+  const [page, setPage] = useState(1);
   const child = useOutlet();
-  const handlePageClick = (d)=>{
-    getPokeImageUrl(d.selected*6,limit);
-  } 
+  const [loading, setLoading] = useState(false); //loader spinner need to make it better later on
 
+  
   const getPokeImageUrl = async (offset,limit)=>{ // too many api request need redux
+    setLoading(true);
     const response = await pokeapi.get(`/pokemon?offset=${offset}&limit=${limit}`);
     const PokeImageUrl = response.data.results.map(async el=>await pokeapi.get(el.url));
     Promise.all(PokeImageUrl)
       .then(poke=>poke.map(result=>result.data))
-      .then(pokeData=>setPokeData(pokeData))
+      .then(pokeData=>setPokeData(pokeData));
     setResponseCount(response.data.count);
+    setLoading(false);
   }
   const renderFrontPage = () =>{
     return(
       <>
         <FrontPage pokeData={pokeData} />
-        <ReactPaginate
-            breakLabel="..."
-            nextLabel=">"
-            previousLabel="<"
-            onPageChange={handlePageClick}
-            pageCount={pagecount}
-            containerClassName={'pagination'}
-            activeClassName={'active'}
-            pageRangeDisplayed={1}
-          />
+        <Space h="md"/>
+        <Pagination total={pagecount} size="xs" onChange={setPage} page={page} />
+        {loading ? <span>loading...</span>: null}
       </>
     )
   }
   useEffect(()=>{
-    getPokeImageUrl(0,limit);
-  },[])
+    getPokeImageUrl((page - 1) * 6,limit);
+  },[page])
   return (
-    <Container size="xs">
-      <Stack>
+    <Container size="2000px" p="xl">
+      <Stack align="center">
         <SearchBar />
         <PokeSelect setPokeData={setPokeData} />
       </Stack>
-      <Segment>
-        <Grid>
-          <Grid.Col span={6}>
-            Welcome to Pokedex
+      <Grid grow columns={12} justify="center" mt="5vh" style={{'height':'500px', 'width':'1000px', 'backgroundColor': '#ffff', 'padding': '40px'}}>
+          <Grid.Col span={5}>
             {child || ''}
           </Grid.Col>
-          <Grid.Col span={6}>
+          <Grid.Col span={7}>
             {renderFrontPage()}
           </Grid.Col >
-        </Grid>
-      </Segment>
+      </Grid>
     </Container>
   );
 }

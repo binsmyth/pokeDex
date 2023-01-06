@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
     <meta
@@ -28,6 +29,19 @@
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function(){
+          navigator.serviceWorker.register('serviceWorker.js').then(function(registration){
+            //Registration was successful
+            console.log('ServiceWorker registration succesful with scope: ', registration.scope);
+          }, function(err){
+            //registration failed
+            console.log('serviceWorker registration failed: ', err);
+          });
+          });
+      }
+    </script>
     <div id="root"></div>
     <!--
       This HTML file is a template.

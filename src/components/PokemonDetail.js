@@ -1,12 +1,11 @@
 import React,{ useState, useEffect } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import pokeapi from '../api/pokeapi';
-import { Card, Group, Text, List, Image } from '@mantine/core';
+import { Card, Text, List, Image } from '@mantine/core';
 
 const PokemonDetail = props =>{
   const [detail, setDetail] = useState();
   const [descript, setDescription] = useState();
-  const [flipped, isFlipped] = useState(false);
   const location = useLocation();
   let { index } = useParams();
   let pokeImageSrc = location?.state?.id ? location?.state?.id : index;
@@ -20,7 +19,6 @@ const PokemonDetail = props =>{
       setDetail(data);
     }
     getDetail();
-    isFlipped(false);
   },[location, pokeImageSrc, descript])
   return (
     <div>

@@ -2,16 +2,24 @@ import ImageCard from './ImageCard';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './styles/styles.css';
-import { SimpleGrid, Card, Text } from '@mantine/core';
+import { SimpleGrid, Card, Text, createStyles } from '@mantine/core';
+
+const useStyles = createStyles((theme) => ({
+  card:{
+    width:300,
+    height:300
+  }
+}));
+
 const FrontPage = props =>{
   return (
-    <SimpleGrid cols={3}>
+    <SimpleGrid cols={3} spacing="xs">
       {props.pokeData && props.pokeData.map((src,index)=>{
         return (
           <div key={index} >
             <Link to={`/PokemonDetail/${src.id}`} state={{id:src.id, urls:src.sprites.front_default}}>
               <Card withBorder p="xl" shadow="sm">
-                <Card.Section><ImageCard urls={src.sprites.front_default} id={src.id}/></Card.Section>
+                <Card.Section ><ImageCard urls={src.sprites.front_default} id={src.id}/></Card.Section>
                 <Card.Section><Text align="center" lineClamp={1} size="xs">{src.name}</Text></Card.Section>
               </Card>
             </Link>

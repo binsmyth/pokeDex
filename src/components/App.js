@@ -27,12 +27,18 @@ const App=() => {
     setLoading(false);
   }
   const renderFrontPage = () =>{
+    if(loading){
+      return(
+        <div>
+          Loading ...
+        </div>
+      )
+    }
     return(
       <>
         <FrontPage pokeData={pokeData} />
         <Space h="md"/>
         <Pagination total={pagecount} size="xs" onChange={setPage} page={page} />
-        {loading ? <span>loading...</span>: null}
       </>
     )
   }
@@ -40,16 +46,16 @@ const App=() => {
     getPokeImageUrl((page - 1) * 6,limit);
   },[page])
   return (
-    <Container size="2000px" p="xl">
+    <Container size="1000px" pb="10vh" pt="5vh" >
       <Stack align="center">
         <SearchBar />
         <PokeSelect setPokeData={setPokeData} />
       </Stack>
-      <Grid grow columns={12} justify="center" mt="5vh" style={{'height':'500px', 'width':'1000px', 'backgroundColor': '#ffff', 'padding': '40px'}}>
-          <Grid.Col span={5}>
+      <Grid grow="true" columns={10} mt="5vh" style={{'borderRadius':'10px', 'backgroundColor': '#ffff', 'padding': '40px'}}>
+          <Grid.Col md={6} lg={3} span={3}>
             {child || ''}
           </Grid.Col>
-          <Grid.Col span={7}>
+          <Grid.Col md={6} lg={3} span={7}>
             {renderFrontPage()}
           </Grid.Col >
       </Grid>

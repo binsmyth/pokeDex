@@ -6,11 +6,12 @@ import FrontPage from './components/FrontPage';
 import ImageCard from './components/ImageCard';
 import PokemonDetail from './components/PokemonDetail';
 import { Route,Routes } from 'react-router-dom';
+import { MantineProvider } from '@mantine/core';
 
 ReactDOM.render(
   <BrowserRouter basename="/">
     <Routes>
-      <Route path="/" element={<Suspense fallback={<div>loading...</div>}><App /></Suspense>} >
+      <Route path="/" element={<Suspense fallback={<div>loading...</div>}><MantineProvider theme={{fontFamily:'Lato, sans-serif'}}><App /></MantineProvider></Suspense>} >
         <Route path="/FrontPage" element={<Suspense fallback={<div>loading...</div>}><FrontPage /></Suspense>} />
         <Route path="/PokemonDetail/:index" element={<Suspense fallback={<div>loading...</div>}><PokemonDetail /></Suspense>} />
         <Route path="/Search" element={<Suspense fallback={<div>loading...</div>}><ImageCard /></Suspense>} />

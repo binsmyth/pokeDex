@@ -1,9 +1,9 @@
-@import url("https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Roboto+Mono:400,500,600,700&display=swap");
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
+  font-family: "Roboto Mono";
 }
 html,
 body {
@@ -13,6 +13,7 @@ body {
   place-items: center;
   text-align: center;
   background: linear-gradient(147deg, #f6b323 0%, #f23b26 74%);
+  font-family: "Roboto Mono";
 }
 ::selection {
   color: #fff;

@@ -2,7 +2,7 @@
   "name": "pokedex",
   "version": "0.1.0",
   "private": false,
-  "homepage": "",
+  "homepage": "https://relaxed-raindrop-d51fe7.netlify.app/",
   "dependencies": {
     "@emotion/react": "^11.10.5",
     "@mantine/core": "^5.10.0",

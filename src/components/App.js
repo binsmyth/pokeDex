@@ -3,7 +3,6 @@ import SearchBar from './SearchBar';
 import PokeSelect from './PokeSelect';
 import { useOutlet } from 'react-router-dom';
 import { Grid, Container, Stack, Pagination, Space } from '@mantine/core';
-import 'semantic-ui-css/semantic.min.css';
 import FrontPage from './FrontPage';
 import pokeapi from '../api/pokeapi';
 const App=() => {

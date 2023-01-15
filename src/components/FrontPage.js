@@ -2,14 +2,7 @@ import ImageCard from './ImageCard';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './styles/styles.css';
-import { SimpleGrid, Card, Text, createStyles } from '@mantine/core';
-
-const useStyles = createStyles((theme) => ({
-  card:{
-    width:300,
-    height:300
-  }
-}));
+import { SimpleGrid, Card, Text } from '@mantine/core';
 
 const FrontPage = props =>{
   return (

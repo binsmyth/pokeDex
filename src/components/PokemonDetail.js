@@ -14,15 +14,21 @@ const PokemonDetail = props =>{
   useEffect (()=>{
     const getDetail = async() => {
       const data = await pokeapi.get(`pokemon/${pokeImageSrc}`);
-      const description = await pokeapi.get(`pokemon-species/${pokeImageSrc}`);
-      setDescription(description);
       setDetail(data);
     }
     getDetail();
-  },[location, pokeImageSrc, descript])
+  },[location, pokeImageSrc])
+
+  useEffect(() => {
+    const getDescription = async() =>{
+      const data = await pokeapi.get(`pokemon-species/${pokeImageSrc}`);
+      setDescription(data);
+    }
+    getDescription();
+  },[]);
   return (
     <div>
-      <Card shadow="sm" p="10px" radius="md" withBorder sx={{width:"80%"}}>
+      <Card shadow="sm" p="10px" radius="md" withBorder sx={{width:"80%", height:"90vh"}}>
         <Card.Section component="a">
           <Image src={id<906 ? `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${id}.png`: detail?.data.sprites.front_default} height={200} fit="contain" />
         </Card.Section>

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import SearchBar from './SearchBar';
 import PokeSelect from './PokeSelect';
 import { useOutlet } from 'react-router-dom';
-import { Grid, Container, Stack, Pagination, Space } from '@mantine/core';
+import { Grid, Container, Stack, Pagination, Space, SimpleGrid } from '@mantine/core';
 import FrontPage from './FrontPage';
 import pokeapi from '../api/pokeapi';
 const App=() => {
@@ -52,7 +52,7 @@ const App=() => {
       </Stack>
       <Grid grow="true" columns={10} mt="5vh" style={{'borderRadius':'10px', 'backgroundColor': '#ffff', 'padding': '40px'}}>
           <Grid.Col md={6} lg={3} span={3}>
-            {child || ''}
+            {child || <SimpleGrid cols={3} spacing="xs"><div  style={{width:'200px', height:'400px'}}></div></SimpleGrid>}
           </Grid.Col>
           <Grid.Col md={6} lg={3} span={7}>
             {renderFrontPage()}

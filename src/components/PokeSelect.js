@@ -1,5 +1,4 @@
 import React from 'react';
-//import Select from 'react-select';
 import { Select } from '@mantine/core';
 import pokeapi from '../api/pokeapi';
 const options = [

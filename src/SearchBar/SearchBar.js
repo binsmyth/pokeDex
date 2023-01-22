@@ -30,7 +30,6 @@ const SearchBar = ({ onSubmit }) =>{
   };
 
   const handleChange = e =>{
-    console.log(e.target.value);
     setSearch({title: e.target.value});
     form.setFieldValue('term', e.currentTarget.value);
   }

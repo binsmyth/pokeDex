@@ -30,10 +30,10 @@ const App=() => {
     },
     childgrid:{
       [`@media (max-width:${theme.breakpoints.sm}px)`]:{
-        visibility: 'hidden'
+        display: 'none'
       },
       [`@media (max-width:${theme.breakpoints.md}px)`]:{
-        visibility: 'hidden'
+        display: 'none'
       },
     }
   }))
@@ -90,8 +90,8 @@ const App=() => {
           <PokeSelect setPokeData={setPokeData} />
         </Stack>
         <Grid columns={12} mt="5vh" p={40} className={classes.grid} bg="#ffff" >
-            <Grid.Col md={6} lg={7} sm={1} span={6}>
-              {<Outlet context={[openModal,setOpenModal]}/> || <SimpleGrid cols={3} spacing="xs"><div  sx={{width:'200px', height:'200px'}}></div></SimpleGrid>}
+            <Grid.Col md={6} lg={7} sm={0} span={6} className={classes.childgrid}>
+              {<Outlet context={[openModal,setOpenModal]}/>}
             </Grid.Col>
             
             <Grid.Col md={6} lg={5} sm={1} span={12}>

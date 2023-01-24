@@ -14,6 +14,7 @@ const PokemonDetail = props =>{
   let pokeImageSrc = location?.state?.id ? location?.state?.id : index;
   const id = pokeImageSrc.toString()?.padStart(3, "0");
 
+
   useEffect (()=>{
     const getDetail = async() => {
       const data = await pokeapi.get(`pokemon/${pokeImageSrc}`);
@@ -31,14 +32,18 @@ const PokemonDetail = props =>{
   },[pokeImageSrc]);
   return (
     <div>
-      <Card shadow="sm" ml="8vw" pb="xl" radius="md" className={classes.Card} withBorder >
+
+      <Card shadow="sm" ml="8vw" pb="xl" radius="md" className={classes.Card} bg={`${descript?.data?.color?.name}`} withBorder >
         <Card.Section component="a">
+          <div className={`${classes.GlowingCircle} ${classes.Glow}`}></div>
           <Image src={id<10000 ? `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${id}.png`: detail?.data.sprites.front_default} height={200} fit="contain" />
         </Card.Section>
         <Card.Section p="lg" >
-            <Text weight={1000}>{detail?.data.name}</Text>
-            <Text onClick={()=>setShowDetail(!showDetail)} lineClamp={showDetail === false ? 2 : 3}>{descript?.data?.flavor_text_entries[0]?.flavor_text || "nil"}</Text>
-            <Grid bg="orange.2" mt="xs" p="lg">
+            <Text weight={1000} className={classes.title}>{detail?.data.name}</Text>
+            <div className={`${classes.GlowingSquare} ${classes.Glow}`}></div>
+            <Grid mt="xs" p="lg" className={classes.CardDescription}>
+              <Grid.Col lg={12}><Text onClick={()=>setShowDetail(!showDetail)} lineClamp={showDetail === false ? 2 : 3}>{descript?.data?.flavor_text_entries[0]?.flavor_text || "nil"}</Text>
+</Grid.Col>
               <Grid.Col lg={6} sm={3} className={classes.ColumnTextJustify}>height:</Grid.Col>
               <Grid.Col lg={6} sm={3} className={classes.ColumnTextJustify}>{detail?.data.height || detail?.height}</Grid.Col>
               <Grid.Col lg={6} sm={3} className={classes.ColumnTextJustify}>base experience:</Grid.Col>

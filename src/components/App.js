@@ -2,12 +2,13 @@ import React, { useEffect, useState } from 'react';
 import SearchBar from '../SearchBar/SearchBar';
 import PokeSelect from './PokeSelect';
 import { useOutlet, Outlet } from 'react-router-dom';
-import { Grid, Container, Stack, Pagination, Space, SimpleGrid, Input, Flex, Loader, createStyles, Modal } from '@mantine/core';
+import { Grid, Container, Stack, Pagination, Space, SimpleGrid, Input, Flex, Loader, createStyles, Modal, MediaQuery, Center } from '@mantine/core';
 import FrontPage from './FrontPage';
 import pokeapi from '../api/pokeapi';
 import { usePagination, useMediaQuery } from '@mantine/hooks';
 import { MantineProvider } from '@mantine/core';
 import themes from './themes/themes';
+
 // import { ExampleContext } from './ModalContext';
 const App=() => {
   const [responseCount, setResponseCount] = useState(0);
@@ -25,7 +26,7 @@ const App=() => {
       width:'1000px',
       borderRadius:'10px',
       [`@media (max-width: ${theme.breakpoints.sm}px)`]:{
-        width:'500px',
+        width:'100%',
       },
     },
     childgrid:{
@@ -84,21 +85,25 @@ const App=() => {
 
   return (
     <MantineProvider theme={themes}>
+      <Center>
       <Container size="lg" pb="10vh" pt="5vh" >
         <Stack align="center">
           <SearchBar />
           <PokeSelect setPokeData={setPokeData} />
         </Stack>
         <Grid columns={12} mt="5vh" p={40} className={classes.grid} bg="#ffff" >
-            <Grid.Col md={6} lg={7} sm={0} span={6} className={classes.childgrid}>
-              {<Outlet context={[openModal,setOpenModal]}/>}
-            </Grid.Col>
+            <MediaQuery smallerThan="sm" styles={{display:'none'}}>
+              <Grid.Col md={6} lg={7} sm={0} span={6} >
+                {<Outlet context={[openModal,setOpenModal]}/>}
+              </Grid.Col>
+            </MediaQuery>
             
             <Grid.Col md={6} lg={5} sm={1} span={12}>
               {renderFrontPage()}
             </Grid.Col >
         </Grid>
       </Container>
+      </Center>
     </MantineProvider>
   );
 }

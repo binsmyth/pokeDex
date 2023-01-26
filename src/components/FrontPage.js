@@ -1,10 +1,8 @@
-import ImageCard from './ImageCard';
-import React, { createContext } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import './styles/styles.css';
 import { SimpleGrid, Card, Text, Center } from '@mantine/core';
 import AvatarImage from './AvatarImage/AvatarImage';
-import { useState } from 'react';
 import { useMediaQuery } from '@mantine/hooks';
 
 const FrontPage = props =>{

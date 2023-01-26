@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import SearchBar from '../SearchBar/SearchBar';
 import PokeSelect from './PokeSelect';
-import { useOutlet, Outlet } from 'react-router-dom';
-import { Grid, Container, Stack, Pagination, Space, SimpleGrid, Input, Flex, Loader, createStyles, Modal, MediaQuery, Center } from '@mantine/core';
+import { Outlet } from 'react-router-dom';
+import { Grid, Container, Stack, Pagination, Space, Input, Flex, Loader, createStyles, MediaQuery, Center } from '@mantine/core';
 import FrontPage from './FrontPage';
 import pokeapi from '../api/pokeapi';
-import { usePagination, useMediaQuery } from '@mantine/hooks';
 import { MantineProvider } from '@mantine/core';
 import themes from './themes/themes';
 
@@ -16,9 +15,7 @@ const App=() => {
   const limit = 6;
   const pagecount = Math.ceil(responseCount/limit);
   const [page, setPage] = useState(1);
-  const child = useOutlet();
   const [loading, setLoading] = useState(false); //loader spinner need to make it better later on
-  const pagination = usePagination({total:pagecount});
   const [openModal, setOpenModal] = useState(false);
 
   const useStyles = createStyles((theme) => ({

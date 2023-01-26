@@ -1,5 +1,4 @@
 import React, { Suspense } from 'react';
-import ReactDOM from 'react-dom';
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom';
 import App from './components/App';
@@ -8,7 +7,7 @@ import ImageCard from './components/ImageCard';
 import PokemonDetail from './components/PokemonDetail/PokemonDetail';
 import ModalPokemonDetail from './components/ModalPokemonDetail/ModalPokemonDetail';
 import { Route,Routes } from 'react-router-dom';
-import { Loader, MantineProvider } from '@mantine/core';
+import { Loader } from '@mantine/core';
 createRoot(document.getElementById('root')).render(
   <BrowserRouter basename="/">
     <Routes>

@@ -1,8 +1,7 @@
 import React,{ useState, useEffect } from 'react';
 import { useLocation, useOutletContext, useParams } from 'react-router-dom';
 import pokeapi from '../../api/pokeapi';
-import { Card, Text, List, Image, Grid, Center, Modal } from '@mantine/core';
-import useStyles from './styles';
+import { Card, Text, Image, Grid, Modal } from '@mantine/core';
 
     const ModalPokemonDetail = props =>{
         const [openModal, setOpenModal] = useOutletContext();

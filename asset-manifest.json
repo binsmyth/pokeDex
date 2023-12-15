@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "https://binsmyth.github.io/pokedex/static/css/main.55ce21f7.css",
-    "main.js": "https://binsmyth.github.io/pokedex/static/js/main.164b9c6c.js",
-    "static/media/Pocket Monk.otf": "https://binsmyth.github.io/pokedex/static/media/Pocket Monk.09d09837f1b6dec50403.otf",
-    "index.html": "https://binsmyth.github.io/pokedex/index.html",
-    "main.55ce21f7.css.map": "https://binsmyth.github.io/pokedex/static/css/main.55ce21f7.css.map",
-    "main.164b9c6c.js.map": "https://binsmyth.github.io/pokedex/static/js/main.164b9c6c.js.map"
+    "main.css": "/pokedex/static/css/main.ee96cd6e.css",
+    "main.js": "/pokedex/static/js/main.97d1dae5.js",
+    "static/media/Pocket Monk.otf": "/pokedex/static/media/Pocket Monk.09d09837f1b6dec50403.otf",
+    "index.html": "/pokedex/index.html",
+    "main.ee96cd6e.css.map": "/pokedex/static/css/main.ee96cd6e.css.map",
+    "main.97d1dae5.js.map": "/pokedex/static/js/main.97d1dae5.js.map"
   },
   "entrypoints": [
-    "static/css/main.55ce21f7.css",
-    "static/js/main.164b9c6c.js"
+    "static/css/main.ee96cd6e.css",
+    "static/js/main.97d1dae5.js"
   ]
 }

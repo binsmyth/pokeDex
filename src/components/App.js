@@ -17,7 +17,7 @@ const App=() => {
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false); //loader spinner need to make it better later on
   const [openModal, setOpenModal] = useState(false);
-
+  console.log("working");
   const useStyles = createStyles((theme) => ({
     grid:{
       width:'1000px',

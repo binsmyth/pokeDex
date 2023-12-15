@@ -9,7 +9,7 @@ import ModalPokemonDetail from './components/ModalPokemonDetail/ModalPokemonDeta
 import { Route,Routes } from 'react-router-dom';
 import { Loader } from '@mantine/core';
 createRoot(document.getElementById('root')).render(
-  <BrowserRouter>
+  <BrowserRouter basename={process.env.PUBLIC_URL}>
     <Routes>
       <Route path="/" element={<Suspense fallback={<Loader />}><App /></Suspense>} >
         <Route path="/FrontPage" element={<Suspense fallback={<Loader />}><FrontPage /></Suspense>} />

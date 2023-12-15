@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/pokedex/static/css/main.ee96cd6e.css",
-    "main.js": "/pokedex/static/js/main.be5157a1.js",
+    "main.js": "/pokedex/static/js/main.42056044.js",
     "static/media/Pocket Monk.otf": "/pokedex/static/media/Pocket Monk.09d09837f1b6dec50403.otf",
     "index.html": "/pokedex/index.html",
     "main.ee96cd6e.css.map": "/pokedex/static/css/main.ee96cd6e.css.map",
-    "main.be5157a1.js.map": "/pokedex/static/js/main.be5157a1.js.map"
+    "main.42056044.js.map": "/pokedex/static/js/main.42056044.js.map"
   },
   "entrypoints": [
     "static/css/main.ee96cd6e.css",
-    "static/js/main.be5157a1.js"
+    "static/js/main.42056044.js"
   ]
 }

@@ -2,7 +2,7 @@
   "name": "pokedex",
   "version": "0.1.0",
   "private": false,
-  "homepage": "https://binsmyth.github.io/pokedex",
+  "homepage": "/pokedex",
   "dependencies": {
     "@emotion/react": "^11.10.5",
     "@mantine/core": "^5.10.0",
@@ -45,6 +45,6 @@
     ]
   },
   "devDependencies": {
-    "gh-pages": "^3.2.3"
+    "gh-pages": "^6.1.0"
   }
 }
